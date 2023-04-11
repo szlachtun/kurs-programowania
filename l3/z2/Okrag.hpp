@@ -5,7 +5,7 @@ namespace Zadanie {
 
     class Okrag : public Figura {
     public:
-        explicit Okrag(float r);
+        explicit Okrag(float r, std::string figureName="okrąg");
 
         float area() override;
 

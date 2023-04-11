@@ -1,16 +1,26 @@
 #pragma once
 
+#include <string>
+#include <utility>
+
 namespace Zadanie {
     class Figura {
     public:
+        explicit Figura(std::string figureName);
+
         virtual float area() = 0;
 
         virtual float length() = 0;
+
+        std::string getFigureName();
+
+    private:
+        std::string mFigureName{};
     };
 
     class Czworokat : public Figura {
     public:
-        Czworokat(float a, float b, float c, float d, float angle);
+        Czworokat(float a, float b, float c, float d, float angle, std::string figureName);
 
         float area() override;
 
@@ -28,7 +38,7 @@ namespace Zadanie {
 
     class Romb : public Czworokat {
     public:
-        Romb(float a, float angle) : Czworokat(a, a, a, a, angle) {}
+        Romb(float a, float angle) : Czworokat(a, a, a, a, angle, "romb") {}
 
         float area() override { return Czworokat::area(); }
 
@@ -39,7 +49,7 @@ namespace Zadanie {
 
     class Kwadrat : public Czworokat {
     public:
-        explicit Kwadrat(float a) : Czworokat(a, a, a, a, 90.f) {}
+        explicit Kwadrat(float a) : Czworokat(a, a, a, a, 90.f, "kwadrat") {}
 
         float area() override { return Czworokat::area(); }
 
@@ -50,7 +60,7 @@ namespace Zadanie {
 
     class Prostokat : public Czworokat {
     public:
-        Prostokat(float a, float b) : Czworokat(a, a, b, b, 90.f) {}
+        Prostokat(float a, float b) : Czworokat(a, a, b, b, 90.f, "prostokąt") {}
 
         float area() override { return Czworokat::area(); }
 

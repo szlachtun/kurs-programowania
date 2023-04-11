@@ -1,10 +1,11 @@
 #pragma once
+
 #include "Czworokat.hpp"
 
 namespace Zadanie {
     class Szesciokat : public Figura {
     public:
-        explicit Szesciokat(float a);
+        explicit Szesciokat(float a, std::string figureName = "sześciokąt");
 
         float area() override;
 

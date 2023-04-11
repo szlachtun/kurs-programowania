@@ -3,8 +3,16 @@
 #include <cmath>
 
 namespace Zadanie {
-    Czworokat::Czworokat(float a, float b, float c, float d, float angle)
-            : mA(a), mB(b), mC(c), mD(d), mAngle(angle) {
+    Figura::Figura(std::string figureName)
+            : mFigureName(std::move(figureName)) {
+    }
+
+    std::string Figura::getFigureName() {
+        return mFigureName;
+    }
+
+    Czworokat::Czworokat(float a, float b, float c, float d, float angle, std::string figureName)
+            : mA(a), mB(b), mC(c), mD(d), mAngle(angle), Figura(std::move(figureName)) {
     }
 
     float Czworokat::area() {

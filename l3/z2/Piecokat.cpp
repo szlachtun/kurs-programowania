@@ -2,8 +2,8 @@
 #include <cmath>
 
 namespace Zadanie {
-    Piecokat::Piecokat(float a)
-            : mA(a) {
+    Piecokat::Piecokat(float a, std::string figureName)
+            : mA(a), Figura(std::move(figureName)) {
     }
 
     float Piecokat::area() {

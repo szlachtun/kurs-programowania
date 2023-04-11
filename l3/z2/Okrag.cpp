@@ -2,8 +2,8 @@
 #include "Okrag.hpp"
 
 namespace Zadanie {
-    Okrag::Okrag(float r)
-            : mR(r) {
+    Okrag::Okrag(float r, std::string figureName)
+            : mR(r), Figura(std::move(figureName)) {
     }
 
     float Okrag::area() {

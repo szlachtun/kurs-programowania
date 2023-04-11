@@ -2,8 +2,8 @@
 #include <cmath>
 
 namespace Zadanie {
-    Szesciokat::Szesciokat(float a)
-            : mA(a) {
+    Szesciokat::Szesciokat(float a, std::string figureName)
+            : mA(a), Figura(std::move(figureName)) {
     }
 
     float Szesciokat::area() {
