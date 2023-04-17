@@ -18,6 +18,7 @@ public class Main {
         if (Objects.equals(args[0], "o") && val.size() == 1) {
             if (Okrag.validate(val.get(0)))
                 figura = new Okrag(val.get(0));
+            else throw new IllegalArgumentException("Niewiadomy okrąg");
         } else if (Objects.equals(args[0], "c") && val.size() == 5) {
             if (Prostokat.validate(val.get(0), val.get(1), val.get(2), val.get(3), val.get(4))) {
                 figura = new Prostokat(val.get(0), val.get(1), val.get(2), val.get(3), val.get(4));

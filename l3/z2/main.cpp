@@ -20,6 +20,8 @@ int main(int argc, char *argv[]) {
     if (*argv[1] == 'o' && val.size() == 1) {
         if (Zadanie::Okrag::validate(val[0]))
             figura = new Zadanie::Okrag(val[0], "okrag");
+        else
+            throw std::logic_error("Niewiadomy okrąg");
     } else if (*argv[1] == 'c' && val.size() == 5) {
         if (Zadanie::Romb::validate(val[0], val[1], val[2], val[3], val[4]))
             figura = new Zadanie::Romb(val[0], val[4]);
@@ -32,9 +34,13 @@ int main(int argc, char *argv[]) {
     } else if (*argv[1] == 'p' && val.size() == 1) {
         if (Zadanie::Piecokat::validate(val[0]))
             figura = new Zadanie::Piecokat(val[0]);
+        else
+            throw std::logic_error("Niewiadomy pięciokąt");
     } else if (*argv[1] == 's' && val.size() == 1) {
         if (Zadanie::Szesciokat::validate(val[0]))
             figura = new Zadanie::Szesciokat(val[0]);
+        else
+            throw std::logic_error("Niewiadomy sześciokąt");
     } else
         throw std::logic_error("Niewiadoma figura");
 
