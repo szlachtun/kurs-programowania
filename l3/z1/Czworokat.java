@@ -29,10 +29,10 @@ public class Czworokat extends Figura {
         return mFigureName;
     }
 
-    private float mA = 0.f;
-    private float mB = 0.f;
-    private float mC = 0.f;
-    private float mD = 0.f;
-    private float mAngle = 0.f;
-    private String mFigureName = "";
+    private final float mA;
+    private final float mB;
+    private final float mC;
+    private final float mD;
+    private final float mAngle;
+    private final String mFigureName;
 }

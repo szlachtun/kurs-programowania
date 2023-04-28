@@ -23,7 +23,7 @@ public class Szesciokat extends Figura{
     }
 
 
-    private float mA = 0.f;
+    private final float mA;
 
-    private String mFigureName = "";
+    private final String mFigureName;
 }
