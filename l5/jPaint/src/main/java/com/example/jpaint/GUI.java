@@ -12,6 +12,7 @@ public class GUI{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(GUI.class.getResource("jPaint.fxml"));
             scene = new Scene(fxmlLoader.load());
+
         }
         catch (IOException ex) {
             ex.printStackTrace();

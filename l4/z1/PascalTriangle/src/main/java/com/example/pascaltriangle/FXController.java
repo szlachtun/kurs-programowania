@@ -45,7 +45,6 @@ public class FXController {
         {
             triangleOutput.setText("");
             PascalTriangle pascalTriangle = new PascalTriangle(parsedCountInteger);
-            StringBuilder triangleContent = new StringBuilder();
             for(String line : pascalTriangle.getLineStringList())
             {
                 int lineLength = line.length();

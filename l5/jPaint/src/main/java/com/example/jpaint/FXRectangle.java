@@ -3,32 +3,34 @@ package com.example.jpaint;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-
 import static java.lang.Math.abs;
 
 public class FXRectangle extends Rectangle {
 
-    public FXRectangle(ArrayList<double[]> points) {
-        super(points.get(0)[0], points.get(0)[1], abs(points.get(1)[0] - points.get(0)[0]), abs(points.get(1)[1] - points.get(0)[1]));
-        setFill(Color.DARKGOLDENROD);
+    public FXRectangle(double[][] pointArray) {
+        super(pointArray[0][0], pointArray[0][1], abs(pointArray[1][0] - pointArray[0][0]), abs(pointArray[1][1] - pointArray[0][1]));
+        setFill(Color.GREEN);
     }
 
-    static ArrayList<double[]> convertPoints(double[] a, double[] b) {
-        ArrayList<double[]> result = new ArrayList<>();
+    static double[][] convertPoints(double[] a, double[] b) {
+        double[][] result = new double[2][2];
+
         if (a[0] >= b[0] & a[1] >= b[1]) {
-            result.add(new double[]{b[0], b[1]});
-            result.add(new double[]{a[0], a[1]});
+            result[0] = new double[]{b[0], b[1]};
+            result[1] = new double[]{a[0], a[1]};
         } else if (a[0] >= b[0] & a[1] < b[1]) {
-            result.add(new double[]{b[0], a[1]});
-            result.add(new double[]{a[0], b[1]});
-        } else if (a[0] < b[0] & a[1] >= b[1]) {
-            result.add(new double[]{a[0], b[1]});
-            result.add(new double[]{b[0], a[1]});
+            result[0] = new double[]{b[0], a[1]};
+            result[1] = new double[]{a[0], b[1]};
+        } else if (a[1] >= b[1]) {
+            result[0] = new double[]{a[0], b[1]};
+            result[1] = new double[]{b[0], a[1]};
         } else {
-            result.add(new double[]{a[0], a[1]});
-            result.add(new double[]{b[0], b[1]});
+            result[0] = new double[]{a[0], a[1]};
+            result[1] = new double[]{b[0], b[1]};
         }
+
         return result;
     }
+
+    public boolean isHit(double x, double y) {return getBoundsInLocal().contains(x, y);}
 }

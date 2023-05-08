@@ -39,7 +39,7 @@
             <HBox prefHeight="95.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                 <VBox prefHeight="373.0" prefWidth="60.0">
                     <ToggleButton fx:id="circleButton" mnemonicParsing="false"
-                                  onAction="#toggleCircleButton" prefHeight="30.0" prefWidth="30.0" selected="true">
+                                  onAction="#toggleCircleButton" prefHeight="30.0" prefWidth="30.0">
                         <graphic>
                             <ImageView fitHeight="28" fitWidth="28" pickOnBounds="true"
                                        preserveRatio="true">
@@ -90,7 +90,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2160.0" prefWidth="3840.0" fx:id="pane"
                                     onMouseClicked="#handleMouseClickPane" onMouseDragged="#handleMouseDragPane"
-                                    onScroll="#handleMouseScrollPane"/>
+                                    onScroll="#handleMouseScrollPane" onMouseMoved="#handleMouseMovePane"/>
                     </content>
                 </ScrollPane>
             </HBox>

@@ -25,25 +25,23 @@ import static java.lang.Math.abs;
 
 public class FXController implements Initializable {
     private ArrayList<Shape> createdFigures = new ArrayList<>();
-    private ArrayList<double[]> clickedPos= new ArrayList<>();
+    private ArrayList<double[]> clickedPos = new ArrayList<>();
+
     public void resetClickedPos() {
         this.clickedPos = new ArrayList<>();
     }
+
     @FXML
     private AnchorPane pane;
     @FXML
     private Spinner<Integer> sideCountSpinner;
-
-    @FXML
-    public void initialize(){
-        System.out.println("tridwaras");
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 20, 6, 1);
         sideCountSpinner.setValueFactory(valueFactory);
     }
+
     @FXML
     private ToggleButton circleButton;
 
@@ -54,6 +52,7 @@ public class FXController implements Initializable {
 
     @FXML
     private ToggleButton rectangleButton;
+
     @FXML
     protected void toggleRectangleButton(ActionEvent actionEvent) {
         selectFigureButton(rectangleButton);
@@ -61,6 +60,7 @@ public class FXController implements Initializable {
 
     @FXML
     private ToggleButton polygonButton;
+
     @FXML
     protected void togglePolygonButton(ActionEvent actionEvent) {
         selectFigureButton(polygonButton);
@@ -69,54 +69,42 @@ public class FXController implements Initializable {
     @FXML
     protected void handleMouseClickPane(MouseEvent mouseEvent) {
         if (mouseEvent.getButton() == MouseButton.PRIMARY & mouseEvent.isStillSincePress()) {
-            clickedPos.add(new double[]{ mouseEvent.getX(), mouseEvent.getY()});
-            System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
+
+            if (!Objects.equals(getSelectedButton(), "nothing")) {
+                clickedPos.add(new double[]{mouseEvent.getX(), mouseEvent.getY()});
+                System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
+            }
 
             if (Objects.equals(getSelectedButton(), "circle") && (clickedPos.size() == 2)) {
-                System.out.println("create circle");
+                drawCircle();
 
-                FXCircle circ = new FXCircle(clickedPos.get(0), clickedPos.get(1));
-                createdFigures.add(circ);
-                pane.getChildren().add(circ);
-                resetClickedPos();
+            } else if (Objects.equals(getSelectedButton(), "rectangle") && (clickedPos.size() == 2)) {
+                drawRectangle();
 
+            } else if (Objects.equals(getSelectedButton(), "polygon") && (clickedPos.size() == sideCountSpinner.getValue())) {
+                drawPoly();
             }
-            else if (Objects.equals(getSelectedButton(), "rectangle") && (clickedPos.size() == 2)) {
-                System.out.println("create rectangle");
-
-                FXRectangle rect = new FXRectangle(FXRectangle.convertPoints(clickedPos.get(0), clickedPos.get(1)));
-
-                createdFigures.add(rect);
-                pane.getChildren().add(rect);
-                resetClickedPos();
-            }
-            /*
-            switch (getSelectedButton()) {
-                case "circle" -> {
-                    System.out.println("create circle");
-
-                }
-                case "rectangle" -> {
-                    System.out.println("create rectangle");
-                    FXRectangle rect = new FXRectangle(clickedX, clickedY, 100, 100);
-                    createdFigures.add(rect);
-                    pane.getChildren().add(rect);
-                }
-
-                case "polygon" -> System.out.println("create polygon");
-            }
-             */
-        }
-        else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+        } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
             System.out.println("context menu");
         }
     }
+
     @FXML
-    protected void handleMouseDragPane(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() == MouseButton.PRIMARY & mouseEvent.isDragDetect()) {
-            System.out.println("dragging");
+    protected void handleMouseMovePane(MouseEvent mouseEvent) {
+        if (Objects.equals(getSelectedButton(), "nothing")) {
+            int hitFigureIndex = getHitFigureIndex(mouseEvent);
         }
     }
+
+    @FXML
+    protected void handleMouseDragPane(MouseEvent mouseEvent) {
+        if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.isDragDetect() &&
+                Objects.equals(getSelectedButton(), "nothing")) {
+            System.out.println("figure moving");
+            int hitFigureIndex = getHitFigureIndex(mouseEvent);
+        }
+    }
+
     @FXML
     protected void handleMouseScrollPane(ScrollEvent scrollEvent) {
         if (scrollEvent.getEventType() == ScrollEvent.SCROLL) {
@@ -145,7 +133,7 @@ public class FXController implements Initializable {
         }
     }
 
-    protected String getSelectedButton(){
+    protected String getSelectedButton() {
         if (circleButton.isSelected())
             return "circle";
         else if (rectangleButton.isSelected())
@@ -153,45 +141,56 @@ public class FXController implements Initializable {
         else if (polygonButton.isSelected())
             return "polygon";
         else
-            throw new RuntimeException();
-    }
-    /*
-
-    private ArrayList<Shape> figures = new ArrayList<>();
-
-    public ArrayList<Shape> getFigures() {
-        return figures;
+            return "nothing";
     }
 
-    public void addFigure(Shape figures) {
-        this.figures.add(figures);
-    }
+    protected int getHitFigureIndex(MouseEvent mouseEvent) {
+        for(int i = createdFigures.size() - 1; i >= 0; i--) {
+            Shape figure = createdFigures.get(i);
 
-    @FXML
-    protected void drawFigure(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            System.out.println(mouseEvent.getX() + " " + mouseEvent.getY());
-            if (circleButton.isSelected()) {
-                System.out.println("circle chosen");
-            } else if (rectangleButton.isSelected()) {
-                System.out.println("rectangle chosen");
-            } else if (polygonButton.isSelected()) {
-                System.out.println("polygon chosen");
+            if (figure instanceof FXCircle tempCircle) {
+                if (tempCircle.isHit(mouseEvent.getX(), mouseEvent.getY())) {
+                    System.out.println("Hit circle!");
+                    return i;
+                }
+            } else if (figure instanceof FXRectangle tempRectangle) {
+                if (tempRectangle.isHit(mouseEvent.getX(), mouseEvent.getY())) {
+                    System.out.println("Hit rectangle!");
+                    return i;
+                }
+            } else if (figure instanceof FXPolygon tempPolygon) {
+                if (tempPolygon.isHit(mouseEvent.getX(), mouseEvent.getY())) {
+                    System.out.println("Hit polygon!");
+                    return i;
+                }
             }
         }
+        return -1;
     }
 
-
-    @FXML
-    protected void moveFigure(MouseEvent mouseEvent) {
-        System.out.println("dragging detected");
+    protected void drawCircle() {
+        FXCircle figure = new FXCircle(clickedPos.get(0), clickedPos.get(1));
+        System.out.println("created circle");
+        createdFigures.add(figure);
+        pane.getChildren().add(figure);
+        resetClickedPos();
     }
 
-    @FXML
-    protected void scaleFigure(ScrollEvent scrollEvent) {
-        System.out.println("scrolling detected");
+    protected void drawRectangle() {
+        FXRectangle rect = new FXRectangle(FXRectangle.convertPoints(clickedPos.get(0), clickedPos.get(1)));
+        System.out.println("created rectangle");
+        createdFigures.add(rect);
+        pane.getChildren().add(rect);
+        resetClickedPos();
     }
 
+    protected void drawPoly() {
+        FXPolygon poly = new FXPolygon(FXPolygon.convertPoints(clickedPos));
+        System.out.println("created polygon");
+        createdFigures.add(poly);
+        pane.getChildren().add(poly);
+        resetClickedPos();
+    }
 
-     */
+    protected void moveFigure(int index, double dx, double dy) {}
 }
