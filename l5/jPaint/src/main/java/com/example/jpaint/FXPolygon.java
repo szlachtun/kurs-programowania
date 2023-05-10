@@ -28,4 +28,18 @@ public class FXPolygon extends Polygon {
     public boolean isHit(double x, double y) {
         return getBoundsInLocal().contains(x, y);
     }
+
+    public double[] addX(double[] points, double dx) {
+        for (int i = 0; i < points.length; i+=2) {
+            points[i] += dx;
+        }
+        return points;
+    }
+
+    public double[] addY(double[] points, double dy) {
+        for (int i = 1; i < points.length; i+=2) {
+            points[i] += dy;
+        }
+        return points;
+    }
 }

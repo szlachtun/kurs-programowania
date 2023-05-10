@@ -32,5 +32,13 @@ public class FXRectangle extends Rectangle {
         return result;
     }
 
+    public void addX(double x) {
+        setX(getX() + x);
+    }
+
+    public void addY(double y) {
+        setY(getY() + y);
+    }
+
     public boolean isHit(double x, double y) {return getBoundsInLocal().contains(x, y);}
 }

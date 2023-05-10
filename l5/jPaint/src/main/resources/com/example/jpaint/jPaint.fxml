@@ -86,13 +86,11 @@
                     </Spinner>
                 </VBox>
                 <Separator orientation="VERTICAL" prefHeight="200.0"/>
-                <ScrollPane prefHeight="400.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2160.0" prefWidth="3840.0" fx:id="pane"
-                                    onMouseClicked="#handleMouseClickPane" onMouseDragged="#handleMouseDragPane"
-                                    onScroll="#handleMouseScrollPane" onMouseMoved="#handleMouseMovePane"/>
-                    </content>
-                </ScrollPane>
+                <Pane minHeight="0.0" minWidth="0.0" prefHeight="400.0" HBox.hgrow="ALWAYS" prefWidth="400.0"
+                      fx:id="pane"
+                      onMouseClicked="#handleMouseClickPane" onMouseDragged="#handleMouseDragPane"
+                      onScroll="#handleMouseScrollPane" onMouseMoved="#handleMouseMovePane"/>
+
             </HBox>
         </VBox>
     </center>

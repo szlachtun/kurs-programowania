@@ -20,5 +20,12 @@ public class FXCircle extends Circle {
         return getBoundsInLocal().contains(x, y);
     }
 
+    public void addX(double x) {
+        this.setCenterX(this.getCenterX() + x);
+    }
+
+    public void addY(double y) {
+        this.setCenterY(this.getCenterY() + y);
+    }
 
 }
