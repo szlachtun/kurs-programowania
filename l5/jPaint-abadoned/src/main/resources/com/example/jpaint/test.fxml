@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.jpaint.FXController">
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <MenuBar fx:id="bar" prefHeight="32.0" prefWidth="600.0">
+            </MenuBar>
+            <HBox fx:id="hbox" prefHeight="95.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                <VBox prefHeight="373.0" prefWidth="60.0">
+                    <ToggleButton fx:id="circleButton" mnemonicParsing="false" onAction="#toggleCircleButton"
+                                  prefHeight="30.0" prefWidth="30.0">
+                        <graphic>
+                            <ImageView fitHeight="28" fitWidth="28" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@circle.png"/>
+                            </ImageView>
+                        </graphic>
+                        <VBox.margin>
+                            <Insets bottom="3.0" left="6.0" right="6.0" top="6.0"/>
+                        </VBox.margin>
+                    </ToggleButton>
+                    <ToggleButton fx:id="rectangleButton" mnemonicParsing="false" onAction="#toggleRectangleButton"
+                                  prefHeight="30.0" prefWidth="30.0">
+                        <graphic>
+                            <ImageView fitHeight="28" fitWidth="28" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@rectangle.png"/>
+                            </ImageView>
+                        </graphic>
+                        <VBox.margin>
+                            <Insets bottom="3.0" left="6.0" right="6.0" top="3.0"/>
+                        </VBox.margin>
+                    </ToggleButton>
+                    <ToggleButton fx:id="polygonButton" mnemonicParsing="false" onAction="#togglePolygonButton"
+                                  prefHeight="30.0" prefWidth="30.0">
+                        <graphic>
+                            <ImageView fitHeight="28" fitWidth="28" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@polygon.png"/>
+                            </ImageView>
+                        </graphic>
+                        <VBox.margin>
+                            <Insets bottom="3.0" left="6.0" right="6.0" top="3.0"/>
+                        </VBox.margin>
+                    </ToggleButton>
+                    <Spinner fx:id="sideCountSpinner" disable="true" editable="true" prefHeight="20.0" prefWidth="46.0">
+                        <styleClass>
+                            <!--suppress JavaFxUnresolvedStyleClassReference -->
+                            <String fx:value="split-arrows-vertical"/>
+                        </styleClass>
+                        <VBox.margin>
+                            <Insets left="6.0" right="6.0" top="2.0"/>
+                        </VBox.margin>
+                    </Spinner>
+                    <Label prefHeight="39.0" prefWidth="60.0" text="Kolor figury" textAlignment="CENTER"
+                           wrapText="true"/>
+                    <ColorPicker>
+                        <VBox.margin>
+                            <Insets/>
+                        </VBox.margin>
+                    </ColorPicker>
+                </VBox>
+                <Separator orientation="VERTICAL" prefHeight="200.0"/>
+                <Pane fx:id="pane" onMouseClicked="#handleMouseClickPane" onMouseDragged="#handleMouseDragPane"
+                      onMouseMoved="#handleMouseMovePane" onScroll="#handleMouseScrollPane" prefHeight="400.0"
+                      prefWidth="400.0" HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

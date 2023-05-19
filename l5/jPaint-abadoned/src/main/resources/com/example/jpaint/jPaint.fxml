@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.ToggleButton?>
@@ -16,27 +13,15 @@
 <?import javafx.scene.image.Image?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.ScrollPane?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.jpaint.FXController">
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <MenuBar>
-                <Menu mnemonicParsing="false" text="File">
-                    <MenuItem mnemonicParsing="false" text="Close"/>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <MenuItem mnemonicParsing="false" text="Delete"/>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <MenuItem mnemonicParsing="false" text="About"/>
-                </Menu>
+            <MenuBar fx:id="bar">
             </MenuBar>
-            <HBox prefHeight="95.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <HBox prefHeight="95.0" prefWidth="600.0" VBox.vgrow="ALWAYS" fx:id="hbox">
                 <VBox prefHeight="373.0" prefWidth="60.0">
                     <ToggleButton fx:id="circleButton" mnemonicParsing="false"
                                   onAction="#toggleCircleButton" prefHeight="30.0" prefWidth="30.0">
@@ -86,11 +71,10 @@
                     </Spinner>
                 </VBox>
                 <Separator orientation="VERTICAL" prefHeight="200.0"/>
-                <Pane minHeight="0.0" minWidth="0.0" prefHeight="400.0" HBox.hgrow="ALWAYS" prefWidth="400.0"
-                      fx:id="pane"
+                <Pane prefHeight="400.0" prefWidth="400.0" HBox.hgrow="ALWAYS" fx:id="pane"
                       onMouseClicked="#handleMouseClickPane" onMouseDragged="#handleMouseDragPane"
-                      onScroll="#handleMouseScrollPane" onMouseMoved="#handleMouseMovePane"/>
-
+                      onScroll="#handleMouseScrollPane" onMouseMoved="#handleMouseMovePane">
+                </Pane>
             </HBox>
         </VBox>
     </center>
